@@ -5,6 +5,6 @@
 FILE="$1"
 HIDDEN="%% @hidden"
 
-if [ "$(head -n 1 $FILE)" != "$HIDDEN" ]; then
-    echo "0a\n$HIDDEN\n.\nw" | ed "$FILE" >/dev/null
+if [ "$(head -n 1 "$FILE")" != "$HIDDEN" ]; then
+    echo "$HIDDEN" | cat - "$FILE" > $$ && mv $$ "$FILE"
 fi
